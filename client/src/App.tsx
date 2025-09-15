@@ -1,7 +1,5 @@
 import { useState, useEffect } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { Header, CounterCard, ServerCommunicationCard, SSECard, Footer } from '@/components'
 
 interface ServerMessage {
   message: string
@@ -81,63 +79,23 @@ function App() {
       eventSource.close()
       setIsSSEConnected(false)
     }
-  }, []) // Remove isSSEConnected dependency to allow reconnection
+  }, [])
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className="min-h-screen bg-gray-50 py-8 transition-colors dark:bg-gray-900">
+      <div className="mx-auto max-w-4xl px-4">
+        <Header />
+        <CounterCard count={count} setCount={setCount} />
+        <ServerCommunicationCard
+          serverMessage={serverMessage}
+          serverTime={serverTime}
+          fetchHello={fetchHello}
+          fetchTime={fetchTime}
+        />
+        <SSECard sseData={sseData} isSSEConnected={isSSEConnected} />
+        <Footer />
       </div>
-      <h1>React + Hono + SSE</h1>
-
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>count is {count}</button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-
-      <div className="card">
-        <h3>Server Communication</h3>
-        <button onClick={fetchHello}>Fetch Hello from Server</button>
-        <p>{serverMessage}</p>
-
-        <button onClick={fetchTime}>Fetch Server Time</button>
-        {serverTime && (
-          <div>
-            <p>Server Time: {new Date(serverTime.timestamp).toLocaleString()}</p>
-            <p>Timezone: {serverTime.timezone}</p>
-          </div>
-        )}
-      </div>
-
-      <div className="card">
-        <h3>Server-Sent Events (SSE)</h3>
-        <p>Status: {isSSEConnected ? '🟢 Connected' : '🔴 Disconnected'}</p>
-        <div
-          style={{
-            maxHeight: '200px',
-            overflow: 'auto',
-            border: '1px solid #ccc',
-            padding: '10px',
-          }}
-        >
-          {sseData.map((data, index) => (
-            <div key={index} style={{ marginBottom: '5px', fontSize: '12px' }}>
-              <strong>{new Date(data.timestamp).toLocaleTimeString()}</strong>: {data.message} (Random:{' '}
-              {data.random.toFixed(3)})
-            </div>
-          ))}
-        </div>
-      </div>
-
-      <p className="read-the-docs">Click on the Vite and React logos to learn more</p>
-    </>
+    </div>
   )
 }
 
