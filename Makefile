@@ -26,6 +26,8 @@ help:
 	@echo ""
 	@echo "Utilities:"
 	@echo "  make clean       - Clean all build artifacts and node_modules"
+	@echo "  make format      - Format code with Prettier"
+	@echo "  make format-check - Check code formatting"
 	@echo "  make test        - Run tests (if available)"
 	@echo "  make logs        - Show Docker container logs"
 	@echo "  make status      - Show Docker container status"
@@ -96,6 +98,14 @@ clean:
 	rm -rf server/dist server/node_modules
 	rm -rf node_modules
 	@echo "Cleanup complete!"
+
+format:
+	@echo "Formatting code with Prettier..."
+	pnpm run format
+
+format-check:
+	@echo "Checking code formatting..."
+	pnpm run format:check
 
 test:
 	@echo "Running tests..."

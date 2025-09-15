@@ -16,7 +16,13 @@
     "docker:dev": "docker-compose -f docker-compose.dev.yml up --build",
     "docker:prod": "docker-compose -f docker-compose.prod.yml up --build",
     "docker:down": "docker-compose -f docker-compose.dev.yml down && docker-compose -f docker-compose.prod.yml down",
-    "clean": "rm -rf client/dist server/dist client/node_modules server/node_modules node_modules"
+    "clean": "rm -rf client/dist server/dist client/node_modules server/node_modules node_modules",
+    "format": "pnpm run format:client && pnpm run format:server",
+    "format:client": "cd client && pnpm run format",
+    "format:server": "cd server && pnpm run format",
+    "format:check": "pnpm run format:check:client && pnpm run format:check:server",
+    "format:check:client": "cd client && pnpm run format:check",
+    "format:check:server": "cd server && pnpm run format:check"
   },
   "devDependencies": {
     "concurrently": "^8.2.2"
