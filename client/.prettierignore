@@ -11,3 +11,7 @@ build/
 # Generated files
 *.min.js
 *.min.css
+
+# Config files
+.prettierrc
+.prettierignore

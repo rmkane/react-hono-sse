@@ -1,6 +1,7 @@
+import { useTheme } from '@/hooks/useTheme'
+
 import reactLogo from '../assets/react.svg'
 import viteLogo from '/vite.svg'
-import { useTheme } from '@/hooks/useTheme'
 
 export const Header = () => {
   const { isDarkMode, toggleTheme } = useTheme()

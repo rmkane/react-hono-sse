@@ -1,5 +1,6 @@
-import { Hono } from 'hono'
 import { serve } from '@hono/node-server'
+import { Hono } from 'hono'
+
 import { corsMiddleware } from '@/middleware/cors'
 import routes from '@/routes'
 

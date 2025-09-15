@@ -1,9 +1,6 @@
 import { Hono } from 'hono'
-import { HelloService } from '@/services/helloService'
-import { TimeService } from '@/services/timeService'
-import { HealthService } from '@/services/healthService'
-import { SSEService } from '@/services/sseService'
-import { DocumentationService } from '@/services/documentationService'
+
+import { DocumentationService, HealthService, HelloService, SSEService, TimeService } from '@/services'
 
 const app = new Hono()
 

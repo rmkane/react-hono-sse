@@ -1,5 +1,6 @@
-import { useState, useEffect } from 'react'
-import { Header, CounterCard, ServerCommunicationCard, SSECard, Footer } from '@/components'
+import { useEffect, useState } from 'react'
+
+import { CounterCard, Footer, Header, ServerCommunicationCard, SSECard } from '@/components'
 
 interface ServerMessage {
   message: string

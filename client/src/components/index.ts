@@ -1,5 +1,5 @@
-export { Header } from './Header'
 export { CounterCard } from './CounterCard'
+export { Footer } from './Footer'
+export { Header } from './Header'
 export { ServerCommunicationCard } from './ServerCommunicationCard'
 export { SSECard } from './SSECard'
-export { Footer } from './Footer'
