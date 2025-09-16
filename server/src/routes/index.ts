@@ -43,8 +43,8 @@ app.get('/api/queue/stats', (c) => {
   const generatorStatus = messageGenerator.getStatus()
 
   return c.json({
-    queue: queueStats,
     generator: generatorStatus,
+    queue: queueStats,
   })
 })
 
@@ -64,10 +64,10 @@ app.get('/api/sse', (c) => {
 
   return new Response(stream, {
     headers: {
-      'Content-Type': 'text/event-stream',
+      'Access-Control-Allow-Origin': '*',
       'Cache-Control': 'no-cache',
       Connection: 'keep-alive',
-      'Access-Control-Allow-Origin': '*',
+      'Content-Type': 'text/event-stream',
     },
   })
 })

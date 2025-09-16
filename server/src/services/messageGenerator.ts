@@ -52,17 +52,17 @@ export class MessageGenerator {
     ]
 
     return {
-      timestamp: new Date().toISOString(),
       message: messages[Math.floor(Math.random() * messages.length)],
       random: Math.random(),
+      timestamp: new Date().toISOString(),
     }
   }
 
   // Get current status
   getStatus() {
     return {
-      isRunning: this.isRunning,
       intervalMs: this.intervalId ? 1000 : null,
+      isRunning: this.isRunning,
     }
   }
 }

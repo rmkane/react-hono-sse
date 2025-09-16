@@ -18,8 +18,8 @@ export class MessageQueue {
   // Add a message to the queue
   enqueue(data: SSEData): void {
     const item: MessageQueueItem = {
-      id: crypto.randomUUID(),
       data,
+      id: crypto.randomUUID(),
       timestamp: Date.now(),
     }
 
@@ -52,9 +52,9 @@ export class MessageQueue {
   // Get queue stats
   getStats() {
     return {
+      maxSize: this.maxSize,
       queueSize: this.queue.length,
       subscriberCount: this.subscribers.size,
-      maxSize: this.maxSize,
     }
   }
 

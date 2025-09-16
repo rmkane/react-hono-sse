@@ -17,9 +17,7 @@ export default defineConfig({
     port: 5173,
     proxy: {
       '/api': {
-        target: process.env.VITE_SERVER_URL || 'http://localhost:3001',
         changeOrigin: true,
-        secure: false,
         configure: (proxy, _options) => {
           proxy.on('error', (err, _req, _res) => {
             console.log('proxy error', err)
@@ -31,11 +29,13 @@ export default defineConfig({
             console.log('Received Response from the Target:', proxyRes.statusCode, req.url)
           })
         },
+        secure: false,
+        target: process.env.VITE_SERVER_URL || 'http://localhost:3001',
       },
       '/health': {
-        target: process.env.VITE_SERVER_URL || 'http://localhost:3001',
         changeOrigin: true,
         secure: false,
+        target: process.env.VITE_SERVER_URL || 'http://localhost:3001',
       },
     },
   },

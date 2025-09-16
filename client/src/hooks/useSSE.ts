@@ -30,14 +30,14 @@ interface UseSSEReturn {
 
 export function useSSE(options: UseSSEOptions = {}): UseSSEReturn {
   const {
-    url = '/api/sse',
-    reconnectInterval = 3000,
-    maxReconnectAttempts = 5,
     maxMessages = 10,
-    onMessage,
-    onError,
-    onOpen,
+    maxReconnectAttempts = 5,
     onClose,
+    onError,
+    onMessage,
+    onOpen,
+    reconnectInterval = 3000,
+    url = '/api/sse',
   } = options
 
   const [isConnected, setIsConnected] = useState(false)
@@ -49,11 +49,11 @@ export function useSSE(options: UseSSEOptions = {}): UseSSEReturn {
   const eventSourceRef = useRef<EventSource | null>(null)
   const reconnectTimeoutRef = useRef<NodeJS.Timeout | null>(null)
   const reconnectAttemptsRef = useRef(0)
-  const callbacksRef = useRef({ onOpen, onMessage, onError, onClose })
+  const callbacksRef = useRef({ onClose, onError, onMessage, onOpen })
 
   // Update callbacks ref when they change
   useEffect(() => {
-    callbacksRef.current = { onOpen, onMessage, onError, onClose }
+    callbacksRef.current = { onClose, onError, onMessage, onOpen }
   })
 
   const cleanup = () => {
@@ -217,13 +217,13 @@ export function useSSE(options: UseSSEOptions = {}): UseSSEReturn {
   }
 
   return {
-    isConnected,
-    isConnecting,
-    error,
-    lastMessage,
-    messages,
     connect,
     disconnect,
+    error,
+    isConnected,
+    isConnecting,
+    lastMessage,
+    messages,
     reconnect,
   }
 }

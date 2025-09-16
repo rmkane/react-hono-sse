@@ -6,19 +6,19 @@ interface SSECardProps {
 
 export const SSECard = ({ className = '' }: SSECardProps) => {
   const { isConnected, isConnecting, error, messages } = useSSE({
-    maxMessages: 10, // Keep last 10 messages
-    onMessage: (message) => {
-      console.log('SSE message received:', message)
-    },
+    maxMessages: 10,
     onError: (error) => {
       console.error('SSE error:', error)
     },
+    onMessage: (message) => {
+      console.log('SSE message received:', message)
+    },
   })
   const getStatusDisplay = () => {
-    if (isConnecting) return { text: '🟡 Connecting', className: 'bg-yellow-100 text-yellow-800' }
-    if (error) return { text: '🔴 Error', className: 'bg-red-100 text-red-800' }
-    if (isConnected) return { text: '🟢 Connected', className: 'bg-green-100 text-green-800' }
-    return { text: '🔴 Disconnected', className: 'bg-red-100 text-red-800' }
+    if (isConnecting) return { className: 'bg-yellow-100 text-yellow-800', text: '🟡 Connecting' }
+    if (error) return { className: 'bg-red-100 text-red-800', text: '🔴 Error' }
+    if (isConnected) return { className: 'bg-green-100 text-green-800', text: '🟢 Connected' }
+    return { className: 'bg-red-100 text-red-800', text: '🔴 Disconnected' }
   }
 
   const status = getStatusDisplay()

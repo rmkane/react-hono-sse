@@ -32,9 +32,9 @@ export class SSEService {
   // Legacy method for backward compatibility
   static generateSSEData(): SSEData {
     return {
-      timestamp: new Date().toISOString(),
       message: 'Real-time update from server',
       random: Math.random(),
+      timestamp: new Date().toISOString(),
     }
   }
 }
