@@ -11,18 +11,10 @@ interface ServerTime {
   timezone: string
 }
 
-interface SSEData {
-  timestamp: string
-  message: string
-  random: number
-}
-
 function App() {
   const [count, setCount] = useState(0)
   const [serverMessage, setServerMessage] = useState<string>('')
   const [serverTime, setServerTime] = useState<ServerTime | null>(null)
-  const [sseData, setSseData] = useState<SSEData[]>([])
-  const [isSSEConnected, setIsSSEConnected] = useState(false)
 
   const fetchHello = async () => {
     try {
@@ -50,38 +42,6 @@ function App() {
     fetchTime()
   }, [])
 
-  useEffect(() => {
-    console.log('Attempting to connect to SSE endpoint...')
-    const eventSource = new EventSource('/api/sse')
-
-    eventSource.onmessage = (event) => {
-      console.log('SSE message received:', event.data)
-      try {
-        const data: SSEData = JSON.parse(event.data)
-        setSseData((prev) => [...prev.slice(-9), data]) // Keep last 10 messages
-      } catch (error) {
-        console.error('Error parsing SSE data:', error)
-      }
-    }
-
-    eventSource.onopen = () => {
-      console.log('SSE connection opened successfully')
-      setIsSSEConnected(true)
-    }
-
-    eventSource.onerror = (error) => {
-      console.error('SSE connection error:', error)
-      console.log('EventSource readyState:', eventSource.readyState)
-      setIsSSEConnected(false)
-    }
-
-    return () => {
-      console.log('Cleaning up SSE connection')
-      eventSource.close()
-      setIsSSEConnected(false)
-    }
-  }, [])
-
   return (
     <div className="min-h-screen bg-gray-50 py-8 transition-colors dark:bg-gray-900">
       <div className="mx-auto max-w-4xl px-4">
@@ -93,7 +53,7 @@ function App() {
           fetchHello={fetchHello}
           fetchTime={fetchTime}
         />
-        <SSECard sseData={sseData} isSSEConnected={isSSEConnected} />
+        <SSECard />
         <Footer />
       </div>
     </div>

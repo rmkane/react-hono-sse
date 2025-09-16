@@ -1,5 +1,7 @@
 export { DocumentationService } from './documentationService.js'
 export { HealthService } from './healthService.js'
 export { HelloService } from './helloService.js'
+export { MessageGenerator, messageGenerator } from './messageGenerator.js'
+export { MessageQueue, messageQueue } from './messageQueue.js'
 export { SSEService } from './sseService.js'
 export { TimeService } from './timeService.js'

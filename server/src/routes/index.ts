@@ -1,6 +1,14 @@
 import { Hono } from 'hono'
 
-import { DocumentationService, HealthService, HelloService, SSEService, TimeService } from '@/services/index.js'
+import {
+  DocumentationService,
+  HealthService,
+  HelloService,
+  messageGenerator,
+  messageQueue,
+  SSEService,
+  TimeService,
+} from '@/services/index.js'
 
 const app = new Hono()
 
@@ -29,15 +37,23 @@ app.get('/api/time', (c) => {
   return c.json(timeData)
 })
 
+// Queue statistics endpoint
+app.get('/api/queue/stats', (c) => {
+  const queueStats = messageQueue.getStats()
+  const generatorStatus = messageGenerator.getStatus()
+
+  return c.json({
+    queue: queueStats,
+    generator: generatorStatus,
+  })
+})
+
 // SSE endpoint for real-time updates
 app.get('/api/sse', (c) => {
-  const stream = SSEService.createSSEStream(
-    () => SSEService.generateSSEData(),
-    () => {
-      // Cleanup callback - can be used for logging or other cleanup tasks
-      console.log('SSE connection closed')
-    },
-  )
+  const stream = SSEService.createSSEStream(() => {
+    // Cleanup callback - can be used for logging or other cleanup tasks
+    console.log('SSE connection closed')
+  })
 
   // Handle connection cleanup
   const cleanup = () => {
