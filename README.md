@@ -187,3 +187,7 @@ curl -N http://localhost:3001/api/sse
 - SSE endpoint streams real-time data every second
 - Production setup uses Nginx to proxy API requests to the backend
 - Both development and production Docker configurations are provided
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
