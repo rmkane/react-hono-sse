@@ -3,28 +3,34 @@ FROM node:22-alpine AS builder
 
 WORKDIR /app
 
+# Install pnpm
+RUN npm install -g pnpm
+
 # Copy package files
 COPY package*.json ./
 
 # Install dependencies
-RUN npm ci
+RUN pnpm install
 
 # Copy source code
 COPY . .
 
 # Build the application
-RUN npm run build
+RUN pnpm run build
 
 # Production stage
 FROM node:22-alpine
 
 WORKDIR /app
 
+# Install pnpm
+RUN npm install -g pnpm
+
 # Copy package files
 COPY package*.json ./
 
 # Install production dependencies only
-RUN npm ci --only=production
+RUN pnpm install --prod
 
 # Copy built application
 COPY --from=builder /app/dist ./dist
@@ -33,4 +39,4 @@ COPY --from=builder /app/dist ./dist
 EXPOSE 3001
 
 # Start production server
-CMD ["npm", "start"]
+CMD ["pnpm", "start"]

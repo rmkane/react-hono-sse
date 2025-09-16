@@ -1,4 +1,4 @@
-import type { ServerTime } from '@/types'
+import type { ServerTime } from '@/types/index.js'
 
 export class TimeService {
   static getCurrentTime(): ServerTime {

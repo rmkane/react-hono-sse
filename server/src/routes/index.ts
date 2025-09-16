@@ -1,6 +1,6 @@
 import { Hono } from 'hono'
 
-import { DocumentationService, HealthService, HelloService, SSEService, TimeService } from '@/services'
+import { DocumentationService, HealthService, HelloService, SSEService, TimeService } from '@/services/index.js'
 
 const app = new Hono()
 

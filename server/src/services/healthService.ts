@@ -1,4 +1,4 @@
-import type { HealthStatus } from '@/types'
+import type { HealthStatus } from '@/types/index.js'
 
 export class HealthService {
   static getHealthStatus(): HealthStatus {

@@ -1,4 +1,4 @@
-import type { SSEData } from '@/types'
+import type { SSEData } from '@/types/index.js'
 
 export class SSEService {
   static generateSSEData(): SSEData {

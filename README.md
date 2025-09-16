@@ -45,13 +45,13 @@ A full-stack application with React frontend, Hono backend, and Server-Sent Even
 1. **Install dependencies**:
 
    ```bash
-   pnpm install
+   make install
    ```
 
 2. **Start both client and server**:
 
    ```bash
-   pnpm run dev
+   make dev
    ```
 
 3. **Access the application**:
@@ -63,7 +63,7 @@ A full-stack application with React frontend, Hono backend, and Server-Sent Even
 1. **Start with Docker Compose**:
 
    ```bash
-   pnpm run docker:dev
+   make docker-dev
    ```
 
 2. **Access the application**:
@@ -75,26 +75,37 @@ A full-stack application with React frontend, Hono backend, and Server-Sent Even
 1. **Build and start production containers**:
 
    ```bash
-   pnpm run docker:prod
+   make docker-prod
    ```
 
 2. **Access the application**:
    - Frontend: <http://localhost:80>
    - Backend API: <http://localhost:3001>
 
+## Host/Port Reference
+
+| Environment     | Frontend                | Backend                 | Notes                 |
+|-----------------|-------------------------|-------------------------|-----------------------|
+| **Local Dev**   | <http://localhost:5173> | <http://localhost:3001> | Vite dev server       |
+| **Docker Dev**  | <http://localhost:5173> | <http://localhost:3001> | Same ports as local   |
+| **Docker Prod** | <http://localhost:80>   | <http://localhost:3001> | Nginx serves frontend |
+| **Local Prod**  | <http://localhost:4173> | <http://localhost:3001> | Vite preview server   |
+
 ## Available Scripts
 
 ### Root Level
 
-- `pnpm run dev` - Start both client and server in development mode
-- `pnpm run dev:client` - Start only the React client
-- `pnpm run dev:server` - Start only the Hono server
-- `pnpm run build` - Build both client and server
-- `pnpm run docker:dev` - Start development environment with Docker
-- `pnpm run docker:prod` - Start production environment with Docker
-- `pnpm run docker:down` - Stop all Docker containers
-- `pnpm install` - Install dependencies for all packages
-- `pnpm run clean` - Clean all build artifacts and node_modules
+- `make dev` - Start both client and server in development mode
+- `make dev-client` - Start only the React client
+- `make dev-server` - Start only the Hono server
+- `make build` - Build both client and server
+- `make start` - Start production servers locally
+- `make docker-dev` - Start development environment with Docker
+- `make docker-prod` - Start production environment with Docker
+- `make docker-down` - Stop all Docker containers
+- `make install` - Install dependencies for all packages
+- `make clean` - Clean all build artifacts and node_modules
+- `make format` - Format code with Prettier
 
 ### Client Scripts
 

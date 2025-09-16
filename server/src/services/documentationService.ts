@@ -1,4 +1,4 @@
-import type { ApiDocumentation } from '@/types'
+import type { ApiDocumentation } from '@/types/index.js'
 
 export class DocumentationService {
   static getApiDocumentation(port: number, environment: string): ApiDocumentation {

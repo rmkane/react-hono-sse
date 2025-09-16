@@ -1,4 +1,4 @@
-import type { ServerMessage } from '@/types'
+import type { ServerMessage } from '@/types/index.js'
 
 export class HelloService {
   static getMessage(): ServerMessage {
