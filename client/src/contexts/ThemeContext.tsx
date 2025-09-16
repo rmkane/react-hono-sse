@@ -7,18 +7,27 @@ interface ThemeProviderProps {
 }
 
 export const ThemeProvider = ({ children }: ThemeProviderProps) => {
-  const [isDarkMode, setIsDarkMode] = useState(false)
+  const [isDarkMode, setIsDarkMode] = useState(() => {
+    // Initialize with localStorage or system preference
+    if (typeof window !== 'undefined') {
+      const savedTheme = localStorage.getItem('theme')
+      if (savedTheme) {
+        return savedTheme === 'dark'
+      }
+      const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
+      return mediaQuery.matches
+    }
+    return false
+  })
 
   useEffect(() => {
-    // Check localStorage first, then system preference
-    const savedTheme = localStorage.getItem('theme')
-    if (savedTheme) {
-      setIsDarkMode(savedTheme === 'dark')
+    // Apply initial theme immediately
+    if (isDarkMode) {
+      document.documentElement.classList.add('dark')
     } else {
-      const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
-      setIsDarkMode(mediaQuery.matches)
+      document.documentElement.classList.remove('dark')
     }
-  }, [])
+  }, [isDarkMode])
 
   useEffect(() => {
     // Update document class and localStorage
